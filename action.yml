@@ -1,0 +1,25 @@
+name: 'NODE INSTALL BUILD'
+description: 'Node Install and Build'
+inputs:
+  node_version:  # folder name
+    description: 'Folder Name'
+    required: true
+    default: 'production'
+runs:
+  using: "composite"
+  steps:
+  - name: Use Node.js ${{ inputs.node_version }}
+    uses: actions/setup-node@main
+    with:
+      node-version: ${{ inputs.node_version }}
+      registry-url: https://registry.npmjs.org
+  - name: Install
+    uses: borales/actions-yarn@master
+    with:
+      cmd: install # will run `yarn install` command
+  - name: Build
+    uses: borales/actions-yarn@master
+    env:
+      ALLOWED_HOSTS: "*"
+    with:
+      cmd: build # will run `yarn build` command

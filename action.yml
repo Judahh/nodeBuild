@@ -22,7 +22,7 @@ runs:
     with:
       cmd: install
   - name: Show
-     if: ${{ inputs.change_permissions == 'true' }}
+    if: ${{ inputs.change_permissions == 'true' }}
     run: ls && ls node_modules && ls node_modules/@backapirest && ls node_modules/@backapirest/any && ls node_modules/@backapirest/any/script
   - name: Make back executable
     if: ${{ inputs.change_permissions == 'true' }}

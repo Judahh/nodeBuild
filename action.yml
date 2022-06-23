@@ -21,10 +21,6 @@ runs:
     uses: borales/actions-yarn@master
     with:
       cmd: install
-  - name: Show
-    if: ${{ inputs.change_permissions == 'true' }}
-    run: ls && ls node_modules && ls node_modules/@backapirest && ls node_modules/@backapirest/any && ls node_modules/@backapirest/any/script
-    shell: bash
   - name: Make back executable
     if: ${{ inputs.change_permissions == 'true' }}
     run: chmod +rwx ./node_modules/@backapirest/any/script/back.sh
@@ -36,6 +32,14 @@ runs:
   - name: Set unsafe-perm true
     if: ${{ inputs.change_permissions == 'true' }}
     run: npm config set unsafe-perm true
+    shell: bash
+  - name: Link back 
+    if: ${{ inputs.change_permissions == 'true' }}
+    run: ln ./node_modules/@backapirest/any/script/back.sh /usr/local/bin/back
+    shell: bash
+  - name: show back 
+    if: ${{ inputs.change_permissions == 'true' }}
+    run: which back
     shell: bash
   - name: Build
     uses: borales/actions-yarn@master

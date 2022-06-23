@@ -42,7 +42,7 @@ runs:
     run: ln ./node_modules/.bin/back /usr/local/bin/back
     shell: bash
   - name: show back 
-    if: ${{ inputs.change_permissions == 'true' }}
+    if: ${{ inputs.change_permissions == 'true' && inputs.link == 'true' }}
     run: which back
     shell: bash
   - name: Build

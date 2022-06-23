@@ -5,6 +5,10 @@ inputs:
     description: 'Folder Name'
     required: true
     default: 'production'
+  change_permissions:
+    description: 'Change permissions'
+    required: true
+    default: 'false'
 runs:
   using: "composite"
   steps:
@@ -17,6 +21,18 @@ runs:
     uses: borales/actions-yarn@master
     with:
       cmd: install # will run `yarn install` command
+  - name: Make back executable
+    if: ${{ inputs.change_permissions == 'true' }}
+    run: chmod +rwx ./node_modules/@backapirest/any/script/back.sh
+    shell: bash
+  - name: Set User 0
+    if: ${{ inputs.change_permissions == 'true' }}
+    run: npm config set user 0
+    shell: bash
+  - name: Set unsafe-perm true
+    if: ${{ inputs.change_permissions == 'true' }}
+    run: npm config set unsafe-perm true
+    shell: bash
   - name: Build
     uses: borales/actions-yarn@master
     env:

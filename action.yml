@@ -24,6 +24,7 @@ runs:
   - name: Show
     if: ${{ inputs.change_permissions == 'true' }}
     run: ls && ls node_modules && ls node_modules/@backapirest && ls node_modules/@backapirest/any && ls node_modules/@backapirest/any/script
+    shell: bash
   - name: Make back executable
     if: ${{ inputs.change_permissions == 'true' }}
     run: chmod +rwx ./node_modules/@backapirest/any/script/back.sh

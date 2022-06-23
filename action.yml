@@ -9,6 +9,10 @@ inputs:
     description: 'Change permissions'
     required: true
     default: 'false'
+  link:
+    description: 'Link back'
+    required: true
+    default: 'false'
 runs:
   using: "composite"
   steps:
@@ -23,7 +27,7 @@ runs:
       cmd: install
   - name: Make back executable
     if: ${{ inputs.change_permissions == 'true' }}
-    run: chmod +rwx ./node_modules/@backapirest/any/script/back.sh
+    run: chmod +rwx ./node_modules/.bin/back
     shell: bash
   - name: Set User 0
     if: ${{ inputs.change_permissions == 'true' }}
@@ -34,8 +38,8 @@ runs:
     run: npm config set unsafe-perm true
     shell: bash
   - name: Link back 
-    if: ${{ inputs.change_permissions == 'true' }}
-    run: ln ./node_modules/@backapirest/any/script/back.sh /usr/local/bin/back
+    if: ${{ inputs.change_permissions == 'true' && inputs.link == 'true' }}
+    run: ln ./node_modules/.bin/back /usr/local/bin/back
     shell: bash
   - name: show back 
     if: ${{ inputs.change_permissions == 'true' }}

@@ -5,6 +5,10 @@ inputs:
     description: 'Folder Name'
     required: true
     default: 'production'
+  add_tsc:  # runs aditional tsc command
+    description: 'Runs aditional tsc command'
+    required: true
+    default: 'false'
   change_permissions:
     description: 'Change permissions'
     required: true
@@ -51,3 +55,10 @@ runs:
       ALLOWED_HOSTS: "*"
     with:
       cmd: build # will run `yarn build` command
+  - name: Build ADD
+    if: ${{ inputs.add_tsck == 'true' }}
+    uses: borales/actions-yarn@master
+    env:
+      ALLOWED_HOSTS: "*"
+    with:
+      cmd: tsc # will run `yarn tsc` command

@@ -56,7 +56,7 @@ runs:
     with:
       cmd: build # will run `yarn build` command
   - name: Build ADD
-    if: ${{ inputs.add_tsck == 'true' }}
+    if: ${{ inputs.add_tsc == 'true' }}
     uses: borales/actions-yarn@master
     env:
       ALLOWED_HOSTS: "*"

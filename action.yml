@@ -17,6 +17,10 @@ inputs:
     description: 'Link back'
     required: true
     default: 'false'
+  build_options:
+    description: 'Build Options'
+    required: true
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -54,7 +58,7 @@ runs:
     env:
       ALLOWED_HOSTS: "*"
     with:
-      cmd: build # will run `yarn build` command
+      cmd: build ${{ inputs.build_options }} # will run `yarn build` command
   - name: Build ADD
     if: ${{ inputs.add_tsc == 'true' }}
     uses: borales/actions-yarn@master

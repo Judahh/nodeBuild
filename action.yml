@@ -45,6 +45,7 @@ runs:
     uses: borales/actions-yarn@master
     with:
       cmd: install ${{ inputs.install_options }}
+      dir: ${{ inputs.folder }}
   - name: Make back executable
     if: ${{ inputs.change_permissions == 'true' }}
     run: chmod +rwx ./node_modules/.bin/back
@@ -71,6 +72,7 @@ runs:
       ALLOWED_HOSTS: "*"
     with:
       cmd: build ${{ inputs.build_options }} # will run `yarn build` command
+      dir: ${{ inputs.folder }}
   - name: Build ADD
     if: ${{ inputs.add_tsc == 'true' }}
     uses: borales/actions-yarn@master
@@ -78,3 +80,4 @@ runs:
       ALLOWED_HOSTS: "*"
     with:
       cmd: tsc # will run `yarn tsc` command
+      dir: ${{ inputs.folder }}

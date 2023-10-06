@@ -17,6 +17,10 @@ inputs:
     description: 'Link back'
     required: true
     default: 'false'
+  build:
+    description: 'Build'
+    required: true
+    default: 'true'
   build_options:
     description: 'Build Options'
     required: true
@@ -67,6 +71,7 @@ runs:
     run: which back
     shell: bash
   - name: Build
+    if: ${{ inputs.build == 'true' }}
     uses: borales/actions-yarn@master
     env:
       ALLOWED_HOSTS: "*"
